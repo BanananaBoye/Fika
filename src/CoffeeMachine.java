@@ -9,9 +9,6 @@ public class CoffeeMachine {
         fillReservedCoffee(20);
 
         System.out.println("There is "+reservedCoffee.size()+" reserved Coffees");
-       //for (Coffee c:reservedCoffee){
-       //    System.out.println("Energy: \t"+c.getEnergyValue());
-       //}
     }
       // Fills up the coffee-machine with the proper amount of coffees
     private void fillReservedCoffee(int amount){
