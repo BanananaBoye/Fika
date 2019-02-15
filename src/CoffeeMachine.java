@@ -2,19 +2,19 @@ import java.util.ArrayList;
 
 public class CoffeeMachine {
 
-    ArrayList<Coffee> reservedCoffee;
-
+    public ArrayList<Coffee> reservedCoffee;
+      // Coffee-machine will start with 20 different drinks
     public CoffeeMachine(){
         reservedCoffee = new ArrayList<>();
-        fillReseredCoffee(20);
+        fillReservedCoffee(20);
 
         System.out.println("There is "+reservedCoffee.size()+" reserved Coffees");
        //for (Coffee c:reservedCoffee){
        //    System.out.println("Energy: \t"+c.getEnergyValue());
        //}
     }
-
-    public void fillReseredCoffee(int amount){
+      // Fills up the coffee-machine with the proper amount of coffees
+    private void fillReservedCoffee(int amount){
         for (int i =0;i<amount;i++){
 
             int randDrink = (int) (Math.random()*3);
@@ -32,6 +32,7 @@ public class CoffeeMachine {
             }
         }
     }
+      // remove a coffee from the machine and return a energy value.
     public int drinkCoffee(){
         if(reservedCoffee.size() != 0) {
             int coffeeIndex = (int) (Math.random() * reservedCoffee.size());
@@ -41,10 +42,11 @@ public class CoffeeMachine {
             return coffeeEnergyValue;
         }else return 0;
     }
+      // 20% chance to gain 5 coffees when drinking 1.
     private void randomRefill() {
         double chance = Math.random();
         if (chance < 0.2) {
-            fillReseredCoffee(5);
+            fillReservedCoffee(5);
         }
     }
 }

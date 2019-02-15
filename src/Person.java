@@ -24,7 +24,7 @@ public class Person extends Thread{
         return name;
     }
 
-    public void timeSubraction(){
+    public void timeSubtraction(){
         this.energy -=10;
     }
 
