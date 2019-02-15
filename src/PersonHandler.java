@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class PersonHandlerTest implements Runnable {
+public class PersonHandler implements Runnable {
     // Sync acts as a second lock for the synchronized method. If not used, the person will "stand in line" for the
     // method and will not lose any energy in the process.
     private boolean sync = true; // TODO: Need a better solution.
@@ -10,7 +10,7 @@ public class PersonHandlerTest implements Runnable {
 
     // Construct an arrayList for the Threads aka Persons
     // Give them energy value and name for both the super and child class
-    PersonHandlerTest() {
+    PersonHandler() {
         people = new ArrayList<>();
         coffeeMachine = new CoffeeMachine();
         Person p1 = new Person(this, "Jon", "Jon");
