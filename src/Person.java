@@ -2,13 +2,14 @@
   // This is a Thread aka a Person
 public class Person extends Thread{
 
-    int energy;
-    String name;
+    private int energy;
+    private String name;
 
-    public Person(Runnable target, int energy, String name) {
-        super(target);
-        this.energy = energy;
-        this.name = name;
+    public Person(Runnable target, String name0,String name1) {
+        super(target,name0);
+        this.name = name1;
+        startEnergy();
+        System.out.println(name+" started with "+energy+" energy" );
     }
 
     public int getEnergy() {
@@ -16,7 +17,7 @@ public class Person extends Thread{
     }
 
     public void setEnergy(int energy) {
-        this.energy = energy;
+        this.energy += energy;
     }
 
     public String getPerson() {
@@ -27,8 +28,8 @@ public class Person extends Thread{
         this.energy -=10;
     }
 
-    public void remove(){
-        this.stop();
+    private void startEnergy(){
+        energy = (int ) (Math.random()*90 + 30+1)-30;
     }
 
 }
