@@ -7,7 +7,6 @@ public class CoffeeMachine {
     public CoffeeMachine(){
         reservedCoffee = new ArrayList<>();
         fillReservedCoffee(20);
-
         System.out.println("There is "+reservedCoffee.size()+" reserved Coffees");
     }
       // Fills up the coffee-machine with the proper amount of coffees

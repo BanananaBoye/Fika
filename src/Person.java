@@ -5,8 +5,8 @@ public class Person extends Thread{
     private int energy;
     private String name;
 
-    public Person(Runnable target, String name0,String name1) {
-        super(target,name0);
+    public Person(Runnable target, String name1) {
+        super(target);
         this.name = name1;
         startEnergy();
         System.out.println(name+" started with "+energy+" energy" );

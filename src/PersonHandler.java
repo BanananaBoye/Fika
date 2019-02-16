@@ -13,10 +13,10 @@ public class PersonHandler implements Runnable {
     PersonHandler() {
         people = new ArrayList<>();
         coffeeMachine = new CoffeeMachine();
-        Person p1 = new Person(this, "Jon", "Jon");
-        Person p2 = new Person(this, "Kim", "Kim");
-        Person p3 = new Person(this, "Rey", "Rey");
-        Person p4 = new Person(this, "Max", "Max");
+        Person p1 = new Person(this, "Jon");
+        Person p2 = new Person(this, "Kim");
+        Person p3 = new Person(this, "Rey");
+        Person p4 = new Person(this, "Max");
         people.add(p1);people.add(p2);people.add(p3);people.add(p4);
         p1.start();p2.start();p3.start();p4.start();
     }
@@ -37,7 +37,7 @@ public class PersonHandler implements Runnable {
       // Sync function, ONLY 1 thread can enter at the time.
       // Puts the Thread to sleep for 10 sec. After that it will get 100 energy.
     public synchronized void coffeeRoom() {
-        System.out.println(Thread.currentThread().getName() + " has " + people.get(compare()).getEnergy() + " energy and goes to the coffee-room");
+        System.out.println(people.get(compare()).getPerson() + " has " + people.get(compare()).getEnergy() + " energy and goes to the coffee-room");
         sync = false;
         while (people.get(compare()).getEnergy() < 30) {
             try {
@@ -52,14 +52,14 @@ public class PersonHandler implements Runnable {
                 removePerson();
             }
         }
-        System.out.println(Thread.currentThread().getName() + " leaves the coffee-room with " + people.get(compare()).getEnergy() + " energy");
+        System.out.println(people.get(compare()).getPerson() + " leaves the coffee-room with " + people.get(compare()).getEnergy() + " energy");
         sync = true;
     }
       // Simple function to find the correct Person.
     private int compare() {
         int index = 0;
         for (int i = 0; i < people.size(); i++) {
-            if (Thread.currentThread().getName().equals(people.get(i).getPerson())) {
+            if (Thread.currentThread().equals(people.get(i))) {
                 index = i;
                 break;
             }
@@ -68,7 +68,7 @@ public class PersonHandler implements Runnable {
     }
       // Removes Person from array and stops the thread
     private void removePerson() {
-        System.out.println("\n" + Thread.currentThread().getName() + ":   Fuck this, I'm going HOME" + "\n");
+        System.out.println("\n" + people.get(compare()).getPerson() + ":   Fuck this, I'm going HOME" + "\n");
         people.get(compare()).stop();  // ...
         people.remove(compare());
     }
