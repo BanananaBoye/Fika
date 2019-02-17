@@ -36,23 +36,23 @@ public class PersonHandler implements Runnable {
     }
       // Sync function, ONLY 1 thread can enter at the time.
       // Puts the Thread to sleep for 10 sec. After that it will get 100 energy.
-    public synchronized void coffeeRoom() {
-        System.out.println(people.get(compare()).getPerson() + " has " + people.get(compare()).getEnergy() + " energy and goes to the coffee-room");
+    private synchronized void coffeeRoom() {
+        System.out.println(" - "+people.get(compare()).getPerson() + " has " + people.get(compare()).getEnergy() + " energy and goes to the coffee-room");
         sync = false;
-        while (people.get(compare()).getEnergy() < 30) {
+        while (people.get(compare()).getEnergy() <= 100) {
             try {
-                TimeUnit.SECONDS.sleep(2);
+                TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (coffeeMachine.drinkCoffee() != 0) {
+            if (coffeeMachine.reservedCoffee.size() != 0) {
                 people.get(compare()).setEnergy(coffeeMachine.drinkCoffee());
                 System.out.println("The coffee machine has " + coffeeMachine.reservedCoffee.size() + " drinks left");
             } else {
                 removePerson();
             }
         }
-        System.out.println(people.get(compare()).getPerson() + " leaves the coffee-room with " + people.get(compare()).getEnergy() + " energy");
+        System.out.println(" - "+people.get(compare()).getPerson() + " leaves the coffee-room with " + people.get(compare()).getEnergy() + " energy");
         sync = true;
     }
       // Simple function to find the correct Person.
@@ -68,22 +68,23 @@ public class PersonHandler implements Runnable {
     }
       // Removes Person from array and stops the thread
     private void removePerson() {
-        System.out.println("\n" + people.get(compare()).getPerson() + ":   Fuck this, I'm going HOME" + "\n");
+        System.out.println("\n - "+people.get(compare()).getPerson() + ":   Fuck this, I'm going HOME" + "\n");
         people.get(compare()).stop();  // ...
         people.remove(compare());
     }
       // Person is working and losing energy
     private void working(){
-        // Will freeze the loop without the sync
-        if (people.get(compare()).getEnergy() < 30 && sync) {
-            coffeeRoom();
             // "Remove the thread for the array and loop
-        } else if (people.get(compare()).getEnergy() < 0) {
+        if (people.get(compare()).getEnergy() < 0) {
             removePerson();
+            // Will freeze the loop without the sync
+        } else if (people.get(compare()).getEnergy() < 30 && sync) {
+            coffeeRoom();
             // Subtract -10 energy for each second.
         } else {
             people.get(compare()).timeSubtraction();
         }
+        System.out.println(" - "+people.get(compare()).getPerson() + " Just lost 10 Energy, currently on " + people.get(compare()).getEnergy() + " energy");
     }
 }
 

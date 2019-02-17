@@ -33,6 +33,7 @@ public class CoffeeMachine {
         if(reservedCoffee.size() != 0) {
             int coffeeIndex = (int) (Math.random() * reservedCoffee.size());
             int coffeeEnergyValue = reservedCoffee.get(coffeeIndex).getEnergyValue();
+
             randomRefill();
             reservedCoffee.remove(coffeeIndex);
             return coffeeEnergyValue;
@@ -43,6 +44,11 @@ public class CoffeeMachine {
         double chance = Math.random();
         if (chance < 0.2) {
             fillReservedCoffee(5);
+            System.out.print("Magic coffee machine created ");
+            for (int i = reservedCoffee.size()-5;i<reservedCoffee.size();i++){
+                System.out.print(" "+ reservedCoffee.get(i).getName()+", ");
+            }
+            System.out.println("");
         }
     }
 }

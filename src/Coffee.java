@@ -12,5 +12,6 @@ public abstract class Coffee {
        int temp = (int) (Math.random() * (max - min+1)) + min;
        energyValue = temp;
     }
+    public abstract String getName();
 
 }
